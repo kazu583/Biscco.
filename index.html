@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Name - We live better. より自然体に生きていく。-</title>
+    <!-- おしゃれなセリフ体・サンセリフ体の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --frame-yellow: #f3d13b; /* whyte風のイエローフレーム */
+            --bg-cream: #fdf8e7;     /* メニュー部分のクリーム背景 */
+            --bg-pink: #df8c86;      /* サロン紹介部分のピンク背景 */
+            --bg-sage: #d8e2dc;      /* スタイリスト部分の背景 */
+            --text-dark: #2c2c2c;
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-cream);
+            line-height: 1.8;
+            /* 左側のイエローフレーム分を空ける */
+            padding-left: 36px;
+            padding-top: 64px;
+        }
+
+        /* 左端の固定イエローフレーム */
+        .left-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 100vh;
+            background-color: var(--frame-yellow);
+            z-index: 90;
+        }
+
+        /* 上部の固定ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background-color: var(--frame-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--text-light);
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        /* サンセット風のライン表現 */
+        .logo-icon::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35%;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--frame-yellow),
+                var(--frame-yellow) 2px,
+                var(--text-light) 2px,
+                var(--text-light) 4px
+            );
+        }
+
+        .btn-reserve {
+            color: var(--text-light);
+            border: 1px solid var(--text-light);
+            padding: 6px 16px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-reserve:hover {
+            background-color: var(--text-light);
+            color: #d4b01c;
+        }
+
+        /* ハンバーガーメニューボタン */
+        .menu-toggle {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--text-light);
+        }
+
+        /* ナビゲーションドロワー */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 360px;
+            height: 100vh;
+            background-color: var(--frame-yellow);
+            z-index: 200;
+            padding: 80px 40px;
+            transition: 0.4s ease;
+        }
+
+        .nav-drawer.active {
+            right: 0;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-drawer ul {
+            list-style: none;
+        }
+
+        .nav-drawer li {
+            margin-bottom: 18px;
+        }
+
+        .nav-drawer a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+
+        /* セクション共通設定 */
+        section {
+            position: relative;
+            padding: 70px 25px 70px 45px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper {
+            width: 100%;
+            position: relative;
+        }
+
+        /* 左端の縦向きタイトル */
+        .side-title {
+            position: absolute;
+            top: 60px;
+            left: -18px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            line-height: 1;
+            user-select: none;
+            z-index: 95;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        /* 1. ヒーロー＆コンセプト（海・夕日のグラデーション背景） */
+        .hero-concept {
+            background: linear-gradient(to bottom, #9ab0b8 0%, #dcd0b8 55%, #b89c7d 100%);
+            color: var(--text-light);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-catch {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            line-height: 1.05;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .concept-sub {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 22px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .concept-text {
+            font-size: 14px;
+            line-height: 2.2;
+            max-width: 520px;
+            letter-spacing: 0.05em;
+        }
+
+        /* 2. サロン紹介・アクセス（テラコッタピンク） */
+        .salon-wrap {
+            background-color: var(--bg-pink);
+            color: var(--text-light);
+        }
+
+        .salon-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .salon-photo {
+            width: 100%;
+            height: 260px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .salon-info {
+            font-size: 15px;
+            line-height: 2;
+            letter-spacing: 0.08em;
+        }
+
+        /* 3. スタイリスト紹介 */
+        .stylist-wrap {
+            background-color: var(--bg-sage);
+        }
+
+        .stylist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .stylist-card {
+            background: rgba(255,255,255,0.6);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .stylist-img {
+            width: 100%;
+            height: 220px;
+            background-color: #cbd5ce;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .stylist-role {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #666;
+        }
+
+        .stylist-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* 4. メニュー・料金（クリーム背景） */
+        .menu-wrap {
+            background-color: var(--bg-cream);
+        }
+
+        .menu-category {
+            margin-bottom: 40px;
+        }
+
+        .menu-category h3 {
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+        }
+
+        .menu-note {
+            font-size: 13px;
+            margin: 25px 0;
+        }
+
+        /* お支払い方法ボックス */
+        .payment-box {
+            background-color: #ffffff;
+            padding: 25px;
+            margin: 35px 0;
+            border-radius: 2px;
+        }
+
+        .payment-box h4 {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .payment-box p {
+            font-size: 13px;
+        }
+
+        /* キャンセルポリシー */
+        .policy-box {
+            margin-top: 40px;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .policy-box h4 {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .policy-box p {
+            margin-bottom: 15px;
+        }
+
+        /* フッター */
+        footer {
+            background-color: var(--frame-yellow);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-catch {
+                font-size: 84px;
+            }
+            .salon-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+            section {
+                padding: 90px 40px 90px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 左端のイエローフレーム -->
+    <div class="left-frame"></div>
+
+    <!-- 固定ヘッダー -->
+    <header>
+        <a href="#home" class="logo">
+            <span class="logo-icon"></span>
+            salon name
+        </a>
+        <a href="#reserve" class="btn-reserve">ONLINE RESERVATION</a>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="メニューを開く">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- ナビゲーションメニュー -->
+    <nav class="nav-drawer" id="navDrawer">
+        <button class="nav-close" onclick="toggleMenu()">×</button>
+        <ul>
+            <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#concept" onclick="toggleMenu()">Concept</a></li>
+            <li><a href="#salon" onclick="toggleMenu()">Salon</a></li>
+            <li><a href="#stylist" onclick="toggleMenu()">Stylist</a></li>
+            <li><a href="#menu" onclick="toggleMenu()">Menu</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. Home & Concept -->
+    <div class="section-wrapper hero-concept" id="home">
+        <section id="concept">
+            <h1 class="hero-catch">We<br>live<br>better.</h1>
+            <h2 class="concept-sub">より自然体に<br>生きていくために。</h2>
+            <p class="concept-text">
+                いま世界中の人たちが、さまざまな当たり前に疑問を持ち始め、より健康に生きていくために、より歓びを持って生きていくために、どうすればいいかを考える時代。<br>
+                私たちが考えるサスティナブルとは、「より自然体に生きていく」ということ。私たち自身の心も、身体も、より自然体に生きていくためのヘアデザインとライフスタイルを提案していきます。
+            </p>
+        </section>
+    </div>
+
+    <!-- 2. Salon & Access -->
+    <div class="section-wrapper salon-wrap" id="salon">
+        <div class="side-title">Salon</div>
+        <section>
+            <div class="salon-gallery">
+                <div class="salon-photo">［内観写真 1：セット面・ヘリンボーン床など］</div>
+                <div class="salon-photo">［内観写真 2：外観・カフェスペースなど］</div>
+            </div>
+            <div class="salon-info">
+                <p><strong>Salon Name</strong></p>
+                <p>OPEN 9:00 / CLOSE 20:00</p>
+                <p>OPEN ALL YEAR ROUND</p>
+                <p>ADDRESS ： 〒000-0000 東京都〇〇区〇〇 1-2-3</p>
+                <p>TEL ： 03-0000-0000</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- 3. Stylist -->
+    <div class="section-wrapper stylist-wrap" id="stylist">
+        <div class="side-title">Stylist</div>
+        <section>
+            <div class="stylist-grid">
+                <div class="stylist-card">
+                    <div class="stylist-img">［スタッフ写真］</div>
+                    <p class="stylist-role">CREATIVE DIRECTOR</p>
+                    <p class="stylist-name">Taro Yamada</p>
+                </div>
+                <div class="stylist-card">
+                    <div class="stylist-img">［スタッフ写真］</div>
+                    <p class="stylist-role">TOP STYLIST</p>
+                    <p class="stylist-name">Hanako Sato</p>
+                </div>
+                <div class="stylist-card">
+                    <div class="stylist-img">［スタッフ写真］</div>
+                    <p class="stylist-role">STYLIST</p>
+                    <p class="stylist-name">Yuki Takahashi</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 4. Menu & Policy -->
+    <div class="section-wrapper menu-wrap" id="menu">
+        <div class="side-title">Menu</div>
+        <section>
+            <div class="menu-category">
+                <h3>CUT</h3>
+                <ul class="menu-list">
+                    <li class="menu-item"><span>ディレクターカット</span><span>¥7,200</span></li>
+                    <li class="menu-item"><span>トップスタイリストカット</span><span>¥6,900</span></li>
+                    <li class="menu-item"><span>スタイリストカット</span><span>¥6,700</span></li>
+                    <li class="menu-item"><span>前髪カット</span><span>¥2,000</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>PERM</h3>
+                <ul class="menu-list">
+                    <li class="menu-item"><span>オーガニックパーマ</span><span>¥9,700</span></li>
+                    <li class="menu-item"><span>ハードパーマ</span><span>¥10,700</span></li>
+                    <li class="menu-item"><span>VEGANストレートパーマ</span><span>¥15,900</span></li>
+                    <li class="menu-item"><span>前髪パーマ</span><span>¥3,600</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>COLOR</h3>
+                <ul class="menu-list">
+                    <li class="menu-item"><span>VEGANカラー</span><span>¥8,800</span></li>
+                    <li class="menu-item"><span>VEGANブリーチダブルカラー</span><span>¥17,800</span></li>
+                    <li class="menu-item"><span>ブリーチなしダブルカラー</span><span>¥17,300</span></li>
+                    <li class="menu-item"><span>ハイライト</span><span>¥9,200</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>SHAMPOO & BLOW</h3>
+                <ul class="menu-list">
+                    <li class="menu-item"><span>シャンプー＆ブロー</span><span>¥3,800</span></li>
+                    <li class="menu-item"><span>VEGAN 5step トリートメント</span><span>¥5,000</span></li>
+                    <li class="menu-item"><span>オリジナルヘッドスパ</span><span>¥3,200〜</span></li>
+                </ul>
+            </div>
+
+            <p class="menu-note">※スタイリストにより、別途指名料を頂戴しております。</p>
+
+            <div class="payment-box">
+                <h4>お支払い方法</h4>
+                <p>現金・クレジットカード・電子マネー・QR決済（PayPay / LINE Pay / d払い 等）</p>
+            </div>
+
+            <div class="policy-box">
+                <h4>【キャンセルポリシー】</h4>
+                <p>ご予約の変更、キャンセルはお電話または予約サイトにてお願い致します。</p>
+                <p>［ご来店されたことのあるお客様］<br>
+                前日20:00以降のご予約の変更、キャンセル、ご連絡なしでのキャンセルの場合、予約していた金額の100%を頂戴いたします。</p>
+                <p>［ご新規のお客様］<br>
+                予約日の前日20:00までのキャンセルは50%、前日20:00以降のキャンセル、ご連絡なしでのキャンセルの場合、予約していた金額の100%を頂戴いたします。</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; 2026 Salon Name All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const drawer = document.getElementById('navDrawer');
+            drawer.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
