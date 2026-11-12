@@ -10,13 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* お店の外観に合わせたカラーパレット */
-            --frame-greige: #b5ada3;   /* 塗り壁のグレージュ（フレーム） */
-            --bg-offwhite: #faf8f5;    /* 白い外壁・メニュー表のオフホワイト */
-            --bg-sand: #ede8e1;        /* 柔らかいサンドベージュ */
-            --bg-wood: #9c8879;        /* 入り口の木目調・温かみのあるブラウン */
-            --accent-gold: #b89f78;    /* メニュー表のゴールドベージュ */
-            --text-dark: #3e3a37;      /* 柔らかいチャコールブラウン */
+            --frame-greige: #b5ada3;   /* 塗り壁のグレージュ */
+            --bg-offwhite: #faf8f5;    /* オフホワイト */
+            --bg-sand: #ede8e1;        /* サンドベージュ */
+            --bg-wood: #9c8879;        /* 温かみのあるブラウン */
+            --accent-gold: #b89f78;    /* ゴールドベージュ */
+            --text-dark: #3e3a37;      /* チャコールブラウン */
             --text-light: #ffffff;
         }
 
@@ -35,11 +34,11 @@
             color: var(--text-dark);
             background-color: var(--bg-offwhite);
             line-height: 1.9;
-            padding-left: 36px; /* 左側のグレージュフレーム分 */
-            padding-top: 64px;  /* 上部のヘッダー分 */
+            padding-left: 36px;
+            padding-top: 64px;
         }
 
-        /* 左端の固定グレージュフレーム（whyte風） */
+        /* 左端の固定グレージュフレーム */
         .left-frame {
             position: fixed;
             top: 0;
@@ -65,7 +64,6 @@
             z-index: 100;
         }
 
-        /* BISCCO ロゴ（看板のマークを再現） */
         .logo {
             display: flex;
             align-items: center;
@@ -85,7 +83,6 @@
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
         }
 
-        /* ヘッダー中央の予約・電話ボタン */
         .btn-reserve {
             color: var(--text-light);
             border: 1px solid var(--text-light);
@@ -102,7 +99,6 @@
             color: var(--frame-greige);
         }
 
-        /* ハンバーガーメニューボタン */
         .menu-toggle {
             width: 28px;
             height: 18px;
@@ -181,7 +177,6 @@
             overflow: hidden;
         }
 
-        /* 左端フレーム境界の縦向きタイトル（whyte風） */
         .side-title {
             position: absolute;
             top: 65px;
@@ -204,7 +199,7 @@
             text-shadow: none;
         }
 
-        /* 1. ヒーロー＆オープン告知・コンセプト */
+        /* 1. ヒーロー＆コンセプト */
         .hero-concept {
             background: linear-gradient(160deg, #cbc4bc 0%, #9e958b 50%, #877d73 100%);
             color: var(--text-light);
@@ -257,7 +252,7 @@
             opacity: 0.95;
         }
 
-        /* 2. Menu（メニュー表のエレガントなデザインを再現） */
+        /* 2. Menu */
         .menu-wrap {
             background-color: var(--bg-offwhite);
         }
@@ -323,7 +318,7 @@
             color: #6e655c;
         }
 
-        /* 3. Salon & Access（木の温もりと塗り壁をイメージしたブラウン系） */
+        /* 3. Salon & Access */
         .salon-wrap {
             background-color: var(--bg-wood);
             color: var(--text-light);
@@ -457,7 +452,6 @@
     <!-- 固定ヘッダー -->
     <header>
         <a href="#home" class="logo">
-            <!-- お店の看板ロゴマーク（SVG） -->
             <svg class="logo-svg" viewBox="0 0 100 85">
                 <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
             </svg>
@@ -488,7 +482,9 @@
         <section id="concept">
             <div class="open-badge">OPEN 2026.6/25 (THU)</div>
             <h1 class="hero-catch">beauty salon<br>BISCCO</h1>
-            <div class="service-tags">hair make ／ フェイシャルエステ</div>
+            <div class="service-tags">
+                ・Relaxation &nbsp;&nbsp;/&nbsp;&nbsp; ・Hair Design &nbsp;&nbsp;/&nbsp;&nbsp; ・Facial Esthetic
+            </div>
             
             <h2 class="concept-sub">日常に、心地よい余白と美しさを。</h2>
             <p class="concept-text">
@@ -591,14 +587,12 @@
         <div class="side-title">Salon</div>
         <section>
             <div class="salon-gallery">
-                <!-- 外観写真（exterior.jpg として保存すると表示されます） -->
                 <div class="salon-photo-box">
                     <img src="exterior.jpg" alt="BISCCO 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="photo-placeholder-text" style="display:none;">
                         📷 外観の写真を <strong>exterior.jpg</strong> というファイル名で同じフォルダに入れるとここに表示されます
                     </div>
                 </div>
-                <!-- ロゴ写真（logo.jpg として保存すると表示されます） -->
                 <div class="salon-photo-box">
                     <img src="logo.jpg" alt="BISCCO ロゴ" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="photo-placeholder-text" style="display:none;">
