@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BISCCO | beauty salon - hair make & フェイシャルエステ（南さつま市加世田）</title>
+    <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --frame-greige: #b5ada3;
-            --bg-offwhite: #faf8f5;
-            --bg-sand: #ede8e1;
-            --bg-wood: #9c8879;
-            --accent-gold: #b89f78;
-            --text-dark: #3e3a37;
+            /* お店の外観に合わせたカラーパレット */
+            --frame-greige: #b5ada3;   /* 塗り壁のグレージュ（フレーム） */
+            --bg-offwhite: #faf8f5;    /* 白い外壁・メニュー表のオフホワイト */
+            --bg-sand: #ede8e1;        /* 柔らかいサンドベージュ */
+            --bg-wood: #9c8879;        /* 入り口の木目調・温かみのあるブラウン */
+            --accent-gold: #b89f78;    /* メニュー表のゴールドベージュ */
+            --text-dark: #3e3a37;      /* チャコールブラウン */
             --text-light: #ffffff;
         }
 
@@ -33,10 +35,11 @@
             color: var(--text-dark);
             background-color: var(--bg-offwhite);
             line-height: 1.9;
-            padding-left: 36px;
-            padding-top: 64px;
+            padding-left: 36px; /* 左側のグレージュフレーム分 */
+            padding-top: 64px;  /* 上部のヘッダー分 */
         }
 
+        /* 左端の固定グレージュフレーム（whyte風） */
         .left-frame {
             position: fixed;
             top: 0;
@@ -47,6 +50,7 @@
             z-index: 90;
         }
 
+        /* 上部の固定ヘッダー */
         header {
             position: fixed;
             top: 0;
@@ -61,6 +65,7 @@
             z-index: 100;
         }
 
+        /* BISCCO ロゴ（看板のマークを再現） */
         .logo {
             display: flex;
             align-items: center;
@@ -80,6 +85,7 @@
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
         }
 
+        /* ヘッダー中央の予約・電話ボタン */
         .btn-reserve {
             color: var(--text-light);
             border: 1px solid var(--text-light);
@@ -96,6 +102,7 @@
             color: var(--frame-greige);
         }
 
+        /* ハンバーガーメニューボタン */
         .menu-toggle {
             width: 28px;
             height: 18px;
@@ -114,6 +121,7 @@
             background-color: var(--text-light);
         }
 
+        /* ナビゲーションドロワー */
         .nav-drawer {
             position: fixed;
             top: 0;
@@ -159,10 +167,11 @@
             letter-spacing: 2px;
         }
 
+        /* セクション共通設定 */
         section {
             position: relative;
             padding: 80px 25px 80px 45px;
-            max-width: 920px;
+            max-width: 860px;
             margin: 0 auto;
         }
 
@@ -172,6 +181,7 @@
             overflow: hidden;
         }
 
+        /* 左端フレーム境界の縦向きタイトル（whyte風） */
         .side-title {
             position: absolute;
             top: 65px;
@@ -194,7 +204,7 @@
             text-shadow: none;
         }
 
-        /* 1. ヒーロー＆コンセプト（2カラム対応：右側にlogo.jpgを表示） */
+        /* 1. ヒーロー＆オープン告知・コンセプト */
         .hero-concept {
             background: linear-gradient(160deg, #cbc4bc 0%, #9e958b 50%, #877d73 100%);
             color: var(--text-light);
@@ -203,119 +213,51 @@
             align-items: center;
         }
 
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            align-items: center;
-            width: 100%;
-        }
-
         .open-badge {
             display: inline-block;
             border: 1px solid rgba(255,255,255,0.7);
-            padding: 6px 20px;
-            margin-bottom: 22px;
+            padding: 8px 22px;
+            margin-bottom: 25px;
             font-family: 'Cormorant Garamond', serif;
             letter-spacing: 2px;
-            font-size: 15px;
+            font-size: 16px;
             background: rgba(255,255,255,0.1);
         }
 
-        .hero-sub-en {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            letter-spacing: 2px;
-            opacity: 0.9;
-            margin-bottom: 4px;
-        }
-
         .hero-catch {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 52px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
             line-height: 1.1;
-            margin-bottom: 18px;
-            font-weight: 500;
-            letter-spacing: 6px;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 2px;
         }
 
         .service-tags {
-            font-size: 14px;
-            letter-spacing: 2.5px;
-            margin-bottom: 30px;
-            padding-bottom: 12px;
+            font-size: 15px;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            padding-bottom: 15px;
             border-bottom: 1px solid rgba(255,255,255,0.4);
             display: inline-block;
         }
 
         .concept-sub {
-            font-size: 19px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 25px;
             letter-spacing: 2px;
             font-weight: 400;
         }
 
         .concept-text {
-            font-size: 13.5px;
-            line-height: 2.2;
-            letter-spacing: 0.06em;
+            font-size: 14px;
+            line-height: 2.3;
+            max-width: 540px;
+            letter-spacing: 0.08em;
             opacity: 0.95;
         }
 
-        /* 右側の情報カード（logo.jpgを表示） */
-        .hero-card {
-            background: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 6px;
-            padding: 35px 25px;
-            text-align: center;
-            backdrop-filter: blur(4px);
-        }
-
-        .hero-logo-circle {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            background-color: #9e9892;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-logo-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-card-date {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .hero-card-hours {
-            font-size: 12px;
-            line-height: 1.8;
-            opacity: 0.9;
-            padding-bottom: 18px;
-            margin-bottom: 18px;
-            border-bottom: 1px solid rgba(255,255,255,0.25);
-        }
-
-        .hero-card-services {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            letter-spacing: 1.5px;
-            line-height: 1.7;
-            opacity: 0.95;
-        }
-
-        /* 2. Menu */
+        /* 2. Menu（メニュー表のエレガントなデザインを再現） */
         .menu-wrap {
             background-color: var(--bg-offwhite);
         }
@@ -367,11 +309,13 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 18px;
             letter-spacing: 1px;
+            /* オールドスタイル数字ではなく高さを揃える設定 */
             font-variant-numeric: lining-nums;
             display: inline-flex;
             align-items: center;
         }
 
+        /* 「〜」の位置を数字の真横にピタッと揃える微調整クラス */
         .tilde {
             font-family: 'Noto Serif JP', serif;
             font-size: 14px;
@@ -392,7 +336,7 @@
             color: #6e655c;
         }
 
-        /* 3. Salon & Access（exterior.jpgを表示） */
+        /* 3. Salon & Access */
         .salon-wrap {
             background-color: var(--bg-wood);
             color: var(--text-light);
@@ -405,25 +349,7 @@
             margin-bottom: 40px;
         }
 
-        .salon-photo-box {
-            width: 100%;
-            min-height: 300px;
-            background-color: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .salon-photo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        /* 外観イラストカード＆プライベートヒーリングスペース紹介カード */
         .salon-card {
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.28);
@@ -458,11 +384,45 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
         }
 
+        /* ご指定の3項目リスト表記（絵文字なし） */
         .healing-features {
             list-style: none;
             font-family: 'Cormorant Garamond', serif;
             font-size: 19px;
             letter-spacing: 1.5px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .healing-note {
+            font-size: 11px;
+            opacity: 0.75;
+        }
+
+        .salon-photo-box {
+            width: 100%;
+            min-height: 280px;
+            background-color: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .salon-photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            padding: 25px;
             line-height: 1.8;
         }
 
@@ -530,6 +490,7 @@
             background-color: var(--bg-sand);
         }
 
+        /* フッター */
         footer {
             background-color: var(--frame-greige);
             color: var(--text-light);
@@ -541,8 +502,8 @@
         }
 
         @media (min-width: 768px) {
-            .hero-inner {
-                grid-template-columns: 1.35fr 0.85fr;
+            .hero-catch {
+                font-size: 72px;
             }
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
@@ -555,8 +516,10 @@
 </head>
 <body>
 
+    <!-- 左端のグレージュフレーム -->
     <div class="left-frame"></div>
 
+    <!-- 固定ヘッダー -->
     <header>
         <a href="#home" class="logo">
             <svg class="logo-svg" viewBox="0 0 100 85">
@@ -572,6 +535,7 @@
         </button>
     </header>
 
+    <!-- ナビゲーションドロワー -->
     <nav class="nav-drawer" id="navDrawer">
         <button class="nav-close" onclick="toggleMenu()">×</button>
         <ul>
@@ -586,37 +550,15 @@
     <div class="section-wrapper hero-concept" id="home">
         <div class="side-title">Concept</div>
         <section id="concept">
-            <div class="hero-inner">
-                <div>
-                    <div class="open-badge">✦ OPEN 2026.6/25 (THU)</div>
-                    <div class="hero-sub-en">beauty salon</div>
-                    <h1 class="hero-catch">BISCCO</h1>
-                    <div class="service-tags">hair make ／ フェイシャルエステ</div>
-                    
-                    <h2 class="concept-sub">より自然体に、<br>心地よい日常と美しさを。</h2>
-                    <p class="concept-text">
-                        南さつま市加世田の穏やかな街並みに佇む、グレージュの塗り壁と木の温もりが目印のプライベートサロン「BISCCO（ビスコ）」。<br>
-                        日々の暮らしに寄り添うヘアデザインから、特別な日のヘアメイク、素肌と心をほぐすフェイシャルエステまで。飾りすぎない、あなたらしい自然体の美しさを引き出すひとときをご提案します。
-                    </p>
-                </div>
-
-                <!-- 右側カード：ここにGitHub上の logo.jpg が表示されます -->
-                <div class="hero-card">
-                    <div class="hero-logo-circle">
-                        <img src="./logo.jpg" alt="BISCCO ロゴ">
-                    </div>
-                    <div class="hero-card-date">2026.6/25 (THU)</div>
-                    <div class="hero-card-hours">
-                        オープン 9:00〜19:00<br>
-                        定休日 月曜日／第3日曜日
-                    </div>
-                    <div class="hero-card-services">
-                        Cut / Color / Perm<br>
-                        Straight / Treatment / Set<br>
-                        Facial Esthetic
-                    </div>
-                </div>
-            </div>
+            <div class="open-badge">OPEN 2026.6/25 (THU)</div>
+            <h1 class="hero-catch">beauty salon<br>BISCCO</h1>
+            <div class="service-tags">hair make ／ フェイシャルエステ</div>
+            
+            <h2 class="concept-sub">日常に、心地よい余白と美しさを。</h2>
+            <p class="concept-text">
+                南さつま市加世田の穏やかな街並みに佇む、プライベート感のあるビューティーサロン「BISCCO」。<br>
+                毎日のヘアスタイルから、特別な日のヘアメイク、素肌を整えるフェイシャルエステまで。落ち着いた空間の中で、あなたらしい自然体の美しさを引き出すお手伝いをいたします。
+            </p>
         </section>
     </div>
 
@@ -713,12 +655,16 @@
         <div class="side-title">Salon</div>
         <section>
             <div class="salon-gallery">
-                <!-- 左側：ここにGitHub上の exterior.jpg が表示されます -->
+                <!-- 左側：外観写真エリア -->
                 <div class="salon-photo-box">
-                    <img src="./exterior.jpg" alt="BISCCO 外観">
+                    <img src="exterior.jpg" alt="BISCCO 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="photo-placeholder-text" style="display:none;">
+                        <strong>BISCCO 外観イメージ</strong><br>
+                        （外観のお写真を <code>exterior.jpg</code> という名前で同じフォルダに置くとここに表示されます）
+                    </div>
                 </div>
 
-                <!-- 右側：ヒーリングスペース紹介 -->
+                <!-- 右側：プライベートヒーリングスペース紹介（絵文字を削除し3項目リストに変更） -->
                 <div class="salon-card">
                     <div class="healing-tag">PRIVATE HEALING SPACE</div>
                     <h3 class="healing-title">髪も素肌も整う、癒やしの時間</h3>
@@ -730,6 +676,7 @@
                         <li>・Hair Design</li>
                         <li>・Facial Esthetic</li>
                     </ul>
+                    <p class="healing-note">※お手元の写真を配置することも可能です</p>
                 </div>
             </div>
 
