@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BISCCO | beauty salon - hair make & フェイシャルエステ（南さつま市加世田）</title>
+    <title>BISCCO. | beauty salon - hair make & フェイシャルエステ（南さつま市加世田）</title>
     <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +37,7 @@
             line-height: 1.9;
             padding-left: 36px; /* 左側のグレージュフレーム分 */
             padding-top: 64px;  /* 上部のヘッダー分 */
+            overflow-x: hidden;
         }
 
         /* 左端の固定グレージュフレーム（whyte風） */
@@ -65,7 +66,7 @@
             z-index: 100;
         }
 
-        /* BISCCO ロゴ（看板のマークを再現） */
+        /* BISCCO. ロゴ（看板のマークを再現） */
         .logo {
             display: flex;
             align-items: center;
@@ -201,7 +202,7 @@
         /* セクション共通設定 */
         section {
             position: relative;
-            padding: 80px 25px 80px 45px;
+            padding: 80px 25px 80px 55px;
             max-width: 860px;
             margin: 0 auto;
         }
@@ -209,18 +210,17 @@
         .section-wrapper {
             width: 100%;
             position: relative;
-            overflow: hidden;
         }
 
-        /* 左端フレーム境界の縦向きタイトル（whyte風） */
+        /* 左端の縦向きタイトル（見切れないように位置と重なりを調整） */
         .side-title {
             position: absolute;
             top: 65px;
-            left: -16px;
+            left: 4px;
             writing-mode: vertical-rl;
             transform: rotate(180deg);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 54px;
+            font-size: 50px;
             font-weight: 600;
             color: var(--text-light);
             letter-spacing: 3px;
@@ -235,7 +235,7 @@
             text-shadow: none;
         }
 
-        /* 1. ヒーロー＆コンセプト（ご指定のフォント＆サイズバランス） */
+        /* 1. ヒーロー＆コンセプト */
         .hero-concept {
             background: linear-gradient(160deg, #cbc4bc 0%, #9e958b 50%, #877d73 100%);
             color: var(--text-light);
@@ -277,7 +277,7 @@
             font-weight: 400;
         }
 
-        /* 「BISCCO」：看板と同じモダンなサンセリフ体＆広い字間 */
+        /* 「BISCCO.」：看板と同じモダンなサンセリフ体＆広い字間 */
         .hero-catch {
             font-family: 'Montserrat', sans-serif;
             font-size: 52px;
@@ -570,7 +570,11 @@
                 grid-template-columns: 1fr 1fr;
             }
             section {
-                padding: 100px 40px 100px 65px;
+                padding: 100px 40px 100px 70px;
+            }
+            .side-title {
+                font-size: 54px;
+                left: 6px;
             }
         }
     </style>
@@ -586,7 +590,7 @@
             <svg class="logo-svg" viewBox="0 0 100 85">
                 <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
             </svg>
-            BISCCO
+            BISCCO.
         </a>
 
         <div class="header-actions">
@@ -624,12 +628,12 @@
         <section id="concept">
             <div class="open-badge">EST . 2026</div>
             <div class="hero-sub-en">beauty salon</div>
-            <h1 class="hero-catch">BISCCO</h1>
+            <h1 class="hero-catch">BISCCO.</h1>
             <div class="service-tags">hair make ／ フェイシャルエステ</div>
             
             <h2 class="concept-sub">日常に、心地よい余白と美しさを。</h2>
             <p class="concept-text">
-                南さつま市加世田の穏やかな街並みに佇む、プライベート感のあるビューティーサロン「BISCCO」。<br>
+                南さつま市加世田の穏やかな街並みに佇む、プライベート感のあるビューティーサロン「BISCCO.」。<br>
                 毎日のヘアスタイルから、特別な日のヘアメイク、素肌を整えるフェイシャルエステまで。落ち着いた空間の中で、あなたらしい自然体の美しさを引き出すお手伝いをいたします。
             </p>
         </section>
@@ -730,9 +734,9 @@
             <div class="salon-gallery">
                 <!-- 左側：外観写真エリア -->
                 <div class="salon-photo-box">
-                    <img src="exterior.jpg" alt="BISCCO 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <img src="exterior.jpg" alt="BISCCO. 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="photo-placeholder-text" style="display:none;">
-                        <strong>BISCCO 外観イメージ</strong><br>
+                        <strong>BISCCO. 外観イメージ</strong><br>
                         （外観のお写真を <code>exterior.jpg</code> という名前で同じフォルダに置くとここに表示されます）
                     </div>
                 </div>
@@ -757,7 +761,7 @@
                     <svg class="logo-svg" viewBox="0 0 100 85">
                         <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
                     </svg>
-                    BISCCO
+                    BISCCO.
                 </div>
                 <ul class="info-list">
                     <li>
@@ -804,7 +808,7 @@
 
     <!-- フッター -->
     <footer>
-        <p>&copy; 2026 BISCCO All Rights Reserved.</p>
+        <p>&copy; 2026 BISCCO. All Rights Reserved.</p>
     </footer>
 
     <script>
