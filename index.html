@@ -1,528 +1,730 @@
 <!DOCTYPE html>
-<html lang="ja" class="scroll-smooth">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BISCCO | beauty salon - hair make & フェイシャルエステ（南さつま市加世田）</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    <!-- フォントの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        greige: '#b5ada3',      /* 外観の塗り壁グレージュ（フレーム） */
-                        greigeDark: '#8e857b',  /* 深みのあるグレージュ */
-                        offwhite: '#faf8f5',    /* 白い外壁＆メニュー背景 */
-                        sand: '#eee9e2',        /* 柔らかなサンドベージュ */
-                        wood: '#9c8879',        /* エントランスのウッドブラウン */
-                        gold: '#b89f78',        /* メニュー表のゴールドベージュ */
-                        charcoal: '#3e3a37',    /* テキスト用チャコールブラウン */
-                    },
-                    fontFamily: {
-                        serifEn: ['"Cormorant Garamond"', 'serif'],
-                        script: ['"Great Vibes"', 'cursive'],
-                        sansEn: ['"Montserrat"', 'sans-serif'],
-                        serifJp: ['"Noto Serif JP"', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* お店の外観に合わせたカラーパレット */
+            --frame-greige: #b5ada3;   /* 塗り壁のグレージュ（フレーム） */
+            --bg-offwhite: #faf8f5;    /* 白い外壁・メニュー表のオフホワイト */
+            --bg-sand: #ede8e1;        /* 柔らかいサンドベージュ */
+            --bg-wood: #9c8879;        /* 入り口の木目調・温かみのあるブラウン */
+            --accent-gold: #b89f78;    /* メニュー表のゴールドベージュ */
+            --text-dark: #3e3a37;      /* チャコールブラウン */
+            --text-light: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Noto Serif JP', serif;
-            color: #3e3a37;
-            background-color: #faf8f5;
-            padding-left: 36px; /* 左端の固定グレージュフレーム幅 */
-            padding-top: 64px;  /* 上部の固定ヘッダー高さ */
-            overflow-x: hidden;
+            color: var(--text-dark);
+            background-color: var(--bg-offwhite);
+            line-height: 1.9;
+            padding-left: 36px; /* 左側のグレージュフレーム分 */
+            padding-top: 64px;  /* 上部のヘッダー分 */
         }
 
-        /* whyte風の左端縦向きセクション見出し */
-        .vertical-title {
+        /* 左端の固定グレージュフレーム（whyte風） */
+        .left-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 100vh;
+            background-color: var(--frame-greige);
+            z-index: 90;
+        }
+
+        /* 上部の固定ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background-color: var(--frame-greige);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        /* BISCCO ロゴ（看板のマークを再現） */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            letter-spacing: 4px;
+            font-weight: 500;
+        }
+
+        .logo-svg {
+            width: 28px;
+            height: 24px;
+            fill: var(--text-light);
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+
+        /* ヘッダー中央の予約・電話ボタン */
+        .btn-reserve {
+            color: var(--text-light);
+            border: 1px solid var(--text-light);
+            padding: 6px 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-reserve:hover {
+            background-color: var(--text-light);
+            color: var(--frame-greige);
+        }
+
+        /* ハンバーガーメニューボタン */
+        .menu-toggle {
+            width: 28px;
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--text-light);
+        }
+
+        /* ナビゲーションドロワー */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 340px;
+            height: 100vh;
+            background-color: var(--frame-greige);
+            z-index: 200;
+            padding: 80px 40px;
+            transition: 0.4s ease;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-drawer.active {
+            right: 0;
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 18px;
+            right: 25px;
+            font-size: 32px;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-drawer ul {
+            list-style: none;
+        }
+
+        .nav-drawer li {
+            margin-bottom: 20px;
+        }
+
+        .nav-drawer a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            letter-spacing: 2px;
+        }
+
+        /* セクション共通設定 */
+        section {
+            position: relative;
+            padding: 80px 25px 80px 45px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 左端フレーム境界の縦向きタイトル（whyte風） */
+        .side-title {
+            position: absolute;
+            top: 65px;
+            left: -16px;
             writing-mode: vertical-rl;
             transform: rotate(180deg);
             font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 0.08em;
+            font-size: 54px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 3px;
             line-height: 1;
             user-select: none;
+            z-index: 95;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
-        /* 塗り壁（モルタル・ジョリパット）風の微細なテクスチャ表現 */
-        .stucco-texture {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 0),
-                              radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 0);
-            background-size: 16px 16px;
-            background-position: 0 0, 8px 8px;
+        .side-title.dark-text {
+            color: var(--frame-greige);
+            text-shadow: none;
+        }
+
+        /* 1. ヒーロー＆オープン告知・コンセプト */
+        .hero-concept {
+            background: linear-gradient(160deg, #cbc4bc 0%, #9e958b 50%, #877d73 100%);
+            color: var(--text-light);
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .open-badge {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.7);
+            padding: 8px 22px;
+            margin-bottom: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-catch {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .service-tags {
+            font-size: 15px;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+            display: inline-block;
+        }
+
+        .concept-sub {
+            font-size: 20px;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+
+        .concept-text {
+            font-size: 14px;
+            line-height: 2.3;
+            max-width: 540px;
+            letter-spacing: 0.08em;
+            opacity: 0.95;
+        }
+
+        /* 2. Menu（メニュー表のエレガントなデザインを再現） */
+        .menu-wrap {
+            background-color: var(--bg-offwhite);
+        }
+
+        .menu-script-header {
+            font-family: 'Great Vibes', cursive;
+            font-size: 64px;
+            color: var(--accent-gold);
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 40px;
+            line-height: 1;
+        }
+
+        .menu-grid {
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            margin-bottom: 40px;
+        }
+
+        .menu-category h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            color: var(--accent-gold);
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            font-weight: 400;
+            border-bottom: 1px solid #e5dfd5;
+            padding-bottom: 6px;
+        }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+        }
+
+        .menu-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            letter-spacing: 1px;
+            /* オールドスタイル数字ではなく高さを揃える設定 */
+            font-variant-numeric: lining-nums;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* 「〜」の位置を数字の真横にピタッと揃える微調整クラス */
+        .tilde {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 14px;
+            display: inline-block;
+            transform: translateY(1px);
+            margin-left: 2px;
+        }
+
+        .menu-feature-tags {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            background-color: var(--bg-sand);
+            border-radius: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #6e655c;
+        }
+
+        /* 3. Salon & Access */
+        .salon-wrap {
+            background-color: var(--bg-wood);
+            color: var(--text-light);
+        }
+
+        .salon-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* 外観イラストカード＆プライベートヒーリングスペース紹介カード */
+        .salon-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 4px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .healing-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            opacity: 0.85;
+            margin-bottom: 10px;
+        }
+
+        .healing-title {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .healing-desc {
+            font-size: 13px;
+            line-height: 2.1;
+            opacity: 0.92;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* ご指定の3項目リスト表記（絵文字なし） */
+        .healing-features {
+            list-style: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            letter-spacing: 1.5px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .healing-note {
+            font-size: 11px;
+            opacity: 0.75;
+        }
+
+        .salon-photo-box {
+            width: 100%;
+            min-height: 280px;
+            background-color: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .salon-photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            padding: 25px;
+            line-height: 1.8;
+        }
+
+        .salon-info-box {
+            background: rgba(0, 0, 0, 0.12);
+            padding: 35px 30px;
+            border-left: 3px solid var(--text-light);
+        }
+
+        .salon-name-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-list {
+            list-style: none;
+            font-size: 14px;
+            line-height: 2.2;
+            letter-spacing: 0.08em;
+        }
+
+        .info-list li {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px dashed rgba(255,255,255,0.25);
+            padding: 6px 0;
+        }
+
+        .info-label {
+            width: 110px;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        .info-value a {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        .btn-group {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background-color: var(--text-light);
+            color: var(--text-dark);
+            padding: 12px 28px;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-action:hover {
+            background-color: var(--bg-sand);
+        }
+
+        /* フッター */
+        footer {
+            background-color: var(--frame-greige);
+            color: var(--text-light);
+            text-align: center;
+            padding: 35px 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-catch {
+                font-size: 72px;
+            }
+            .salon-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+            section {
+                padding: 100px 40px 100px 65px;
+            }
         }
     </style>
 </head>
-<body class="antialiased selection:bg-greige selection:text-white">
+<body>
 
-    <!-- 左端の固定グレージュフレーム（whyte.tokyo オマージュ） -->
-    <div class="fixed top-0 left-0 w-[36px] h-screen bg-greige stucco-texture z-40 shadow-sm border-r border-white/15"></div>
+    <!-- 左端のグレージュフレーム -->
+    <div class="left-frame"></div>
 
-    <!-- 上部の固定ヘッダー -->
-    <header class="fixed top-0 left-0 w-full h-[64px] bg-greige stucco-texture z-50 flex items-center justify-between px-4 sm:px-7 border-b border-white/15 shadow-sm">
-        <!-- ロゴマーク（お店の立体看板サインをSVGで忠実に再現） -->
-        <a href="#home" class="flex items-center gap-2.5 text-white group focus:outline-none">
-            <svg class="w-7 h-6 fill-white drop-shadow-sm transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 85" aria-hidden="true">
+    <!-- 固定ヘッダー -->
+    <header>
+        <a href="#home" class="logo">
+            <svg class="logo-svg" viewBox="0 0 100 85">
                 <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
             </svg>
-            <span class="font-sansEn text-lg sm:text-xl tracking-[0.25em] font-medium">BISCCO</span>
+            BISCCO
         </a>
-
-        <!-- ヘッダー中央：オンライン・電話予約ボタン（whyte風枠線ボタン） -->
-        <button onclick="openReserveModal()" class="text-white border border-white/85 px-3.5 sm:px-5 py-1.5 text-xs sm:text-sm font-serifEn tracking-[0.12em] hover:bg-white hover:text-charcoal transition duration-300 rounded-sm">
-            ONLINE / TEL RESERVE
-        </button>
-
-        <!-- 右上：ハンバーガーメニューボタン -->
-        <button onclick="toggleDrawer()" class="w-8 h-6 flex flex-col justify-between items-end py-1 group focus:outline-none" aria-label="メニューを開く">
-            <span class="block w-7 h-[1.5px] bg-white transition-all duration-300 group-hover:w-8"></span>
-            <span class="block w-5 h-[1.5px] bg-white transition-all duration-300 group-hover:w-8"></span>
-            <span class="block w-7 h-[1.5px] bg-white transition-all duration-300 group-hover:w-8"></span>
+        <a href="tel:090-6831-0625" class="btn-reserve">ONLINE / TEL RESERVE</a>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="メニューを開く">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
     </header>
 
-    <!-- スライド式ナビゲーションドロワー -->
-    <div id="drawerBackdrop" onclick="toggleDrawer()" class="fixed inset-0 bg-black/40 z-50 hidden opacity-0 transition-opacity duration-300"></div>
-    <nav id="navDrawer" class="fixed top-0 right-0 w-72 sm:w-80 h-screen bg-greige stucco-texture z-50 transform translate-x-full transition-transform duration-300 ease-in-out p-10 flex flex-col justify-between shadow-2xl">
-        <div>
-            <div class="flex justify-between items-center mb-12">
-                <span class="font-sansEn text-white/80 text-xs tracking-[0.25em]">NAVIGATION</span>
-                <button onclick="toggleDrawer()" class="text-white text-3xl leading-none hover:opacity-70 focus:outline-none">&times;</button>
-            </div>
-            <ul class="space-y-6">
-                <li><a href="#home" onclick="toggleDrawer()" class="font-serifEn text-3xl text-white tracking-wider hover:opacity-75 transition block">Home</a></li>
-                <li><a href="#concept" onclick="toggleDrawer()" class="font-serifEn text-3xl text-white tracking-wider hover:opacity-75 transition block">Concept</a></li>
-                <li><a href="#menu" onclick="toggleDrawer()" class="font-serifEn text-3xl text-white tracking-wider hover:opacity-75 transition block">Menu</a></li>
-                <li><a href="#salon" onclick="toggleDrawer()" class="font-serifEn text-3xl text-white tracking-wider hover:opacity-75 transition block">Salon &amp; Access</a></li>
-            </ul>
-        </div>
-        <div class="text-white/90 text-xs space-y-2 border-t border-white/25 pt-6 leading-relaxed">
-            <p class="font-sansEn tracking-widest font-medium">beauty salon BISCCO</p>
-            <p>OPEN 9:00 - 19:00</p>
-            <p>定休日：毎週月曜日／第3日曜日</p>
-            <p class="pt-1">南さつま市加世田唐仁原613-1</p>
-        </div>
+    <!-- ナビゲーションドロワー -->
+    <nav class="nav-drawer" id="navDrawer">
+        <button class="nav-close" onclick="toggleMenu()">×</button>
+        <ul>
+            <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#concept" onclick="toggleMenu()">Concept</a></li>
+            <li><a href="#menu" onclick="toggleMenu()">Menu</a></li>
+            <li><a href="#salon" onclick="toggleMenu()">Salon & Access</a></li>
+        </ul>
     </nav>
 
-    <!-- ==========================================
-         1. HERO & CONCEPT SECTION
-         ========================================== -->
-    <div id="home" class="relative w-full min-h-[90vh] flex items-center bg-gradient-to-br from-[#c8c0b7] via-[#a79e94] to-[#877c71] text-white overflow-hidden">
-        <!-- 背景の柔らかい光彩エフェクト -->
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-[#e6dacb]/15 blur-2xl pointer-events-none"></div>
+    <!-- 1. Home & Concept -->
+    <div class="section-wrapper hero-concept" id="home">
+        <div class="side-title">Concept</div>
+        <section id="concept">
+            <div class="open-badge">OPEN 2026.6/25 (THU)</div>
+            <h1 class="hero-catch">beauty salon<br>BISCCO</h1>
+            <div class="service-tags">hair make ／ フェイシャルエステ</div>
+            
+            <h2 class="concept-sub">日常に、心地よい余白と美しさを。</h2>
+            <p class="concept-text">
+                南さつま市加世田の穏やかな街並みに佇む、プライベート感のあるビューティーサロン「BISCCO」。<br>
+                毎日のヘアスタイルから、特別な日のヘアメイク、素肌を整えるフェイシャルエステまで。落ち着いた空間の中で、あなたらしい自然体の美しさを引き出すお手伝いをいたします。
+            </p>
+        </section>
+    </div>
 
-        <!-- 左端の縦向き見出し -->
-        <div class="vertical-title fixed-side absolute top-16 left-[-14px] sm:left-[-10px] text-5xl sm:text-6xl font-semibold text-white/90 z-30 drop-shadow-sm">
-            Concept
-        </div>
+    <!-- 2. Menu -->
+    <div class="section-wrapper menu-wrap" id="menu">
+        <div class="side-title dark-text">Menu</div>
+        <section>
+            <h2 class="menu-script-header">Menu</h2>
 
-        <section id="concept" class="relative z-10 w-full max-w-4xl mx-auto px-7 sm:px-16 py-20">
-            <div class="grid md:grid-cols-12 gap-10 items-center">
-                <!-- 左カラム：メインコピー＆コンセプト -->
-                <div class="md:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-3 border border-white/75 bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-sm">
-                        <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                        <span class="font-serifEn tracking-[0.2em] text-sm sm:text-base font-medium">OPEN 2026.6/25 (THU)</span>
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Cut</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span>カット（シャンプー・ブロー込み）</span>
+                            <span class="menu-price">¥3,300</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>学生カット</span>
+                            <span class="menu-price">¥2,500</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>キッズカット（未就学児）</span>
+                            <span class="menu-price">¥2,200</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Color</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span>フルカラー</span>
+                            <span class="menu-price">¥4,400<span class="tilde">〜</span></span>
+                        </li>
+                        <li class="menu-item">
+                            <span>リタッチカラー</span>
+                            <span class="menu-price">¥3,500</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Perm</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span>パーマ</span>
+                            <span class="menu-price">¥5,500<span class="tilde">〜</span></span>
+                        </li>
+                        <li class="menu-item">
+                            <span>縮毛矯正</span>
+                            <span class="menu-price">¥12,100</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Treatment</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span>トリートメント</span>
+                            <span class="menu-price">¥1,100<span class="tilde">〜</span></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Hair make & Esthetic</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span>ヘアセット</span>
+                            <span class="menu-price">¥3,850</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>メイク</span>
+                            <span class="menu-price">¥3,500</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>フェイシャルエステ</span>
+                            <span class="menu-price" style="font-size: 14px;">お気軽にお問い合わせください</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="menu-feature-tags">
+                Cut / Color / Perm / Straight / Treatment / Set / Facial Esthetic
+            </div>
+        </section>
+    </div>
+
+    <!-- 3. Salon & Access -->
+    <div class="section-wrapper salon-wrap" id="salon">
+        <div class="side-title">Salon</div>
+        <section>
+            <div class="salon-gallery">
+                <!-- 左側：外観写真エリア -->
+                <div class="salon-photo-box">
+                    <img src="exterior.jpg" alt="BISCCO 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="photo-placeholder-text" style="display:none;">
+                        <strong>BISCCO 外観イメージ</strong><br>
+                        （外観のお写真を <code>exterior.jpg</code> という名前で同じフォルダに置くとここに表示されます）
                     </div>
+                </div>
 
-                    <div class="space-y-2">
-                        <p class="font-serifEn text-xl sm:text-2xl tracking-[0.18em] text-white/90 italic">beauty salon</p>
-                        <h1 class="font-sansEn text-5xl sm:text-7xl tracking-[0.2em] font-medium leading-tight">
-                            BISCCO
-                        </h1>
-                    </div>
-
-                    <div class="inline-block border-b border-white/40 pb-3 text-sm sm:text-base tracking-[0.25em]">
-                        hair make ／ フェイシャルエステ
-                    </div>
-
-                    <h2 class="text-lg sm:text-2xl font-normal tracking-widest leading-relaxed pt-2">
-                        より自然体に、<br>心地よい日常と美しさを。
-                    </h2>
-
-                    <p class="text-xs sm:text-sm leading-[2.3] tracking-wider text-white/95 font-light">
-                        南さつま市加世田の穏やかな街並みに佇む、グレージュの塗り壁と木の温もりが目印のプライベートサロン「BISCCO（ビスコ）」。<br>
-                        日々の暮らしに寄り添うヘアデザインから、特別な日のヘアメイク、素肌と心をほぐすフェイシャルエステまで。飾りすぎない、あなたらしい自然体の美しさを引き出すひとときをご提案します。
+                <!-- 右側：プライベートヒーリングスペース紹介（絵文字を削除し3項目リストに変更） -->
+                <div class="salon-card">
+                    <div class="healing-tag">PRIVATE HEALING SPACE</div>
+                    <h3 class="healing-title">髪も素肌も整う、癒やしの時間</h3>
+                    <p class="healing-desc">
+                        日常の忙しさを忘れ、キャンドルの灯りのようにほっと心がほどける空間をご用意しております。お一人おひとりのお悩みに丁寧に向き合います。
                     </p>
-                </div>
-
-                <!-- 右カラム：お店のオープン告知グラフィック（六角形モチーフ）を再現したビジュアルカード -->
-                <div class="md:col-span-5 flex flex-col items-center">
-                    <div class="w-full max-w-[290px] bg-white/15 backdrop-blur-md border border-white/30 p-6 rounded-md shadow-xl text-center space-y-4">
-                        <!-- 丸いグレー看板の再現 -->
-                        <div class="w-28 h-28 mx-auto rounded-full bg-[#9e9a95] stucco-texture shadow-inner flex flex-col items-center justify-center border-2 border-white/40">
-                            <svg class="w-8 h-7 fill-white mb-1.5 drop-shadow" viewBox="0 0 100 85">
-                                <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
-                            </svg>
-                            <span class="font-sansEn text-[11px] tracking-[0.28em] text-white font-semibold">BISCCO</span>
-                        </div>
-
-                        <div class="border-t border-b border-white/25 py-3 space-y-1">
-                            <p class="font-serifEn text-2xl tracking-[0.15em]">2026.6/25 <span class="text-sm">(THU)</span></p>
-                            <p class="text-[11px] tracking-widest text-white/85">オープン 9:00〜19:00</p>
-                            <p class="text-[11px] tracking-widest text-white/85">定休日 月曜日／第3日曜日</p>
-                        </div>
-
-                        <div class="font-serifEn text-sm tracking-[0.15em] leading-relaxed text-white/95">
-                            Cut / Color / Perm<br>
-                            Straight / Treatment / Set<br>
-                            Facial Esthetic
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ==========================================
-         2. MENU SECTION（メニュー表の再現）
-         ========================================== -->
-    <div id="menu" class="relative w-full bg-offwhite text-charcoal py-20 sm:py-28 border-t border-sand">
-        <!-- 左端の縦向き見出し -->
-        <div class="vertical-title absolute top-20 left-[-14px] sm:left-[-10px] text-5xl sm:text-6xl font-semibold text-greige z-30">
-            Menu
-        </div>
-
-        <section class="w-full max-w-2xl mx-auto px-8 sm:px-14">
-            <!-- 筆記体の「Menu」見出し（お写真のメニュー表デザインを再現） -->
-            <div class="text-center mb-14">
-                <h2 class="font-script text-6xl sm:text-7xl text-gold font-normal select-none">Menu</h2>
-                <p class="text-[11px] tracking-[0.2em] text-greigeDark mt-1">PRICE LIST（税込）</p>
-            </div>
-
-            <div class="space-y-11">
-                <!-- Cut -->
-                <div>
-                    <h3 class="font-serifEn text-2xl sm:text-3xl text-gold tracking-wider border-b border-[#e5dfd5] pb-1.5 mb-4">Cut</h3>
-                    <ul class="space-y-3 text-sm sm:text-[15px]">
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">カット（シャンプー・ブロー込み）</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥3,300</span>
-                        </li>
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">学生カット</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥2,500</span>
-                        </li>
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">キッズカット（未就学児）</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥2,200</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Color -->
-                <div>
-                    <h3 class="font-serifEn text-2xl sm:text-3xl text-gold tracking-wider border-b border-[#e5dfd5] pb-1.5 mb-4">Color</h3>
-                    <ul class="space-y-3 text-sm sm:text-[15px]">
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">フルカラー</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥4,400〜</span>
-                        </li>
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">リタッチカラー</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥3,500</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Perm -->
-                <div>
-                    <h3 class="font-serifEn text-2xl sm:text-3xl text-gold tracking-wider border-b border-[#e5dfd5] pb-1.5 mb-4">Perm</h3>
-                    <ul class="space-y-3 text-sm sm:text-[15px]">
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">パーマ</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥5,500〜</span>
-                        </li>
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">縮毛矯正</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥12,100</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Treatment -->
-                <div>
-                    <h3 class="font-serifEn text-2xl sm:text-3xl text-gold tracking-wider border-b border-[#e5dfd5] pb-1.5 mb-4">Treatment</h3>
-                    <ul class="space-y-3 text-sm sm:text-[15px]">
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">トリートメント</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥1,100〜</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Hair make & Facial Esthetic -->
-                <div>
-                    <h3 class="font-serifEn text-2xl sm:text-3xl text-gold tracking-wider border-b border-[#e5dfd5] pb-1.5 mb-4">Hair make &amp; Esthetic</h3>
-                    <ul class="space-y-3 text-sm sm:text-[15px]">
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">ヘアセット</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥3,850</span>
-                        </li>
-                        <li class="flex justify-between items-baseline">
-                            <span class="tracking-wide">メイク</span>
-                            <span class="font-serifEn text-lg tracking-wider">¥3,500</span>
-                        </li>
-                        <li class="flex justify-between items-baseline pt-1">
-                            <span class="tracking-wide">フェイシャルエステ</span>
-                            <span class="text-xs sm:text-sm text-greigeDark">お気軽にお問い合わせください</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- トータルメニュータグ -->
-            <div class="mt-14 bg-sand/80 border border-[#e2dcd3] p-6 text-center rounded-sm">
-                <p class="font-serifEn text-base sm:text-lg tracking-[0.15em] text-charcoal/80">
-                    Cut / Color / Perm / Straight / Treatment / Set / Facial Esthetic
-                </p>
-                <p class="text-xs text-charcoal/60 mt-2 tracking-wider">
-                    ※髪の長さや施術内容により料金が異なる場合がございます。詳細はお気軽にご相談ください。
-                </p>
-            </div>
-        </section>
-    </div>
-
-    <!-- ==========================================
-         3. SALON & ACCESS SECTION（外観・店舗情報）
-         ========================================== -->
-    <div id="salon" class="relative w-full bg-wood text-white py-20 sm:py-28">
-        <!-- 左端の縦向き見出し -->
-        <div class="vertical-title absolute top-20 left-[-14px] sm:left-[-10px] text-5xl sm:text-6xl font-semibold text-white/90 z-30 drop-shadow-sm">
-            Salon
-        </div>
-
-        <section class="w-full max-w-4xl mx-auto px-7 sm:px-14">
-            <!-- お店の外観＆空間イメージギャラリー -->
-            <div class="grid md:grid-cols-12 gap-5 mb-12">
-                
-                <!-- 1. 外観イラストレーションカード（白い外壁＋グレージュの塗り壁タワー＋木目エントランス＋植栽・ロックガーデン） -->
-                <div class="md:col-span-7 bg-[#e8e4df] rounded-sm overflow-hidden shadow-lg border border-white/30 relative group">
-                    <svg class="w-full h-64 sm:h-72 object-cover" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
-                        <!-- 曇り空の柔らかいグラデーション -->
-                        <defs>
-                            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#dcdfe2"/>
-                                <stop offset="100%" stop-color="#eef0f2"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="500" height="320" fill="url(#skyGrad)"/>
-                        
-                        <!-- 左側の白いサイディング外壁 -->
-                        <polygon points="20,125 220,75 220,255 20,245" fill="#f3f3f1" stroke="#d5d5d0" stroke-width="1"/>
-                        <!-- 上部の横ライン装飾 -->
-                        <line x1="20" y1="138" x2="220" y2="90" stroke="#dcddd8" stroke-width="1.5"/>
-                        <line x1="20" y1="150" x2="220" y2="105" stroke="#dcddd8" stroke-width="1.5"/>
-                        <line x1="20" y1="162" x2="220" y2="120" stroke="#dcddd8" stroke-width="1.5"/>
-                        
-                        <!-- 大きな窓と白いカーテン -->
-                        <polygon points="95,142 175,127 175,222 95,222" fill="#d9e2e5" stroke="#ffffff" stroke-width="3"/>
-                        <line x1="135" y1="134" x2="135" y2="222" stroke="#ffffff" stroke-width="2.5"/>
-                        <line x1="95" y1="182" x2="175" y2="175" stroke="#ffffff" stroke-width="2.5"/>
-
-                        <!-- 右側の建物＆木目調エントランス -->
-                        <polygon points="410,95 485,130 485,245 410,245" fill="#f3f3f1"/>
-                        <polygon points="405,155 460,165 460,240 405,240" fill="#9e6b43"/>
-                        <!-- 木目の横スリット -->
-                        <line x1="405" y1="175" x2="460" y2="182" stroke="#784f2f" stroke-width="1.5"/>
-                        <line x1="405" y1="195" x2="460" y2="200" stroke="#784f2f" stroke-width="1.5"/>
-                        <line x1="405" y1="215" x2="460" y2="218" stroke="#784f2f" stroke-width="1.5"/>
-
-                        <!-- 中央のシンボル：グレージュ塗り壁のL字タワー -->
-                        <polygon points="220,55 345,15 345,255 220,250" fill="#b5ada3"/>
-                        <polygon points="345,15 415,75 415,250 345,255" fill="#a39b91"/>
-                        <!-- 屋根の笠木 -->
-                        <polyline points="20,125 220,75 220,55 345,15 415,75" fill="none" stroke="#6c7073" stroke-width="4"/>
-
-                        <!-- 縦並びの白い立体ロゴサイン「BISCCO」 -->
-                        <g fill="#ffffff" transform="translate(234, 65)">
-                            <path d="M2,2 C2,0 4,0 6,0 L11,0 C14,0 16,2 17,5 C18,7 20,8 22,9 C24,10 25,12 25,15 L25,19 L2,19 Z M8,6 A3,3 0 1,0 8,12 A3,3 0 1,0 8,6 Z" fill-rule="evenodd"/>
-                            <text x="5" y="34" font-family="Montserrat, sans-serif" font-size="13" font-weight="600">B</text>
-                            <text x="8" y="50" font-family="Montserrat, sans-serif" font-size="13" font-weight="600">I</text>
-                            <text x="5" y="66" font-family="Montserrat, sans-serif" font-size="13" font-weight="600">S</text>
-                            <text x="5" y="82" font-family="Montserrat, sans-serif" font-size="13" font-weight="600">C</text>
-                            <text x="5" y="98" font-family="Montserrat, sans-serif" font-size="13" font-weight="600">C</text>
-                            <text x="5" y="114" font-family="Montserrat, sans-serif" font-size="13" font-weight="600">O</text>
-                        </g>
-
-                        <!-- 手前のグレーの割栗石（ロックガーデン）と植栽 -->
-                        <polygon points="0,255 220,250 390,268 180,315 0,285" fill="#7c8288"/>
-                        <circle cx="110" cy="275" r="9" fill="#9aa0a6"/>
-                        <circle cx="130" cy="280" r="11" fill="#63686e"/>
-                        <circle cx="155" cy="273" r="8" fill="#adb3b8"/>
-                        <circle cx="180" cy="285" r="12" fill="#888e94"/>
-                        <circle cx="210" cy="278" r="10" fill="#63686e"/>
-                        <circle cx="245" cy="282" r="9" fill="#9aa0a6"/>
-                        <!-- シンボルツリー（オリーブ・植栽） -->
-                        <line x1="150" y1="265" x2="145" y2="165" stroke="#4a453e" stroke-width="2.5"/>
-                        <circle cx="145" cy="185" r="18" fill="#5e6f52" opacity="0.85"/>
-                        <circle cx="155" cy="210" r="15" fill="#6d7f5f" opacity="0.85"/>
-                        <circle cx="185" cy="235" r="16" fill="#788f64" opacity="0.9"/>
-                    </svg>
-                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/65 via-black/30 to-transparent p-4 text-white flex justify-between items-end">
-                        <div>
-                            <p class="font-sansEn text-xs tracking-widest uppercase opacity-80">Exterior</p>
-                            <p class="text-xs sm:text-sm tracking-wider">グレージュの塗り壁と白い外壁が目印の一軒家サロン</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. サロンサイン＆リラクゼーション空間イメージ（絵文字をなくし、上品な箇条書き表記に修正） -->
-                <div class="md:col-span-5 bg-[#8a7667] border border-white/25 rounded-sm p-6 flex flex-col justify-between shadow-lg">
-                    <div class="space-y-3">
-                        <span class="font-sansEn text-[11px] tracking-[0.25em] text-white/75 uppercase">Private Healing Space</span>
-                        <h3 class="text-lg tracking-wider font-normal">髪も素肌も整う、癒やしの時間</h3>
-                        <p class="text-xs leading-relaxed text-white/90 font-light">
-                            日常の忙しさを忘れ、キャンドルの灯りのようにほっと心がほどける空間をご用意しております。お一人おひとりのお悩みに丁寧に向き合います。
-                        </p>
-                    </div>
-
-                    <!-- 絵文字を排除した洗練された縦並びリスト表記 -->
-                    <ul class="my-4 py-4 border-y border-white/20 space-y-2 font-serifEn text-base sm:text-lg tracking-[0.15em] text-white/95 pl-2">
+                    <ul class="healing-features">
                         <li>・Relaxation</li>
                         <li>・Hair Design</li>
                         <li>・Facial Esthetic</li>
                     </ul>
-
-                    <p class="text-[11px] text-white/75 tracking-wider text-right">
-                        ※お手元の写真を配置することも可能です
-                    </p>
+                    <p class="healing-note">※お手元の写真を配置することも可能です</p>
                 </div>
             </div>
 
-            <!-- 店舗情報詳細ボックス（お写真の情報をすべて反映） -->
-            <div class="bg-black/15 border-l-4 border-white p-6 sm:p-10 rounded-r-sm backdrop-blur-sm">
-                <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-white/20">
-                    <div class="flex items-center gap-3">
-                        <svg class="w-8 h-7 fill-white" viewBox="0 0 100 85">
-                            <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
-                        </svg>
-                        <div>
-                            <h3 class="font-sansEn text-2xl tracking-[0.25em] font-medium">BISCCO</h3>
-                            <p class="text-xs tracking-widest text-white/80">beauty salon / hair make / フェイシャルエステ</p>
-                        </div>
-                    </div>
-                    <span class="bg-white/20 px-3.5 py-1 text-xs font-serifEn tracking-widest rounded-sm">
-                        2026.6/25 (THU) OPEN
-                    </span>
+            <div class="salon-info-box">
+                <div class="salon-name-title">
+                    <svg class="logo-svg" viewBox="0 0 100 85">
+                        <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
+                    </svg>
+                    BISCCO
                 </div>
+                <ul class="info-list">
+                    <li>
+                        <span class="info-label">OPEN</span>
+                        <span class="info-value">9:00 〜 19:00（2026.6/25 THU OPEN）</span>
+                    </li>
+                    <li>
+                        <span class="info-label">CLOSE</span>
+                        <span class="info-value">毎週月曜日 ／ 第3日曜日</span>
+                    </li>
+                    <li>
+                        <span class="info-label">ADDRESS</span>
+                        <span class="info-value">
+                            鹿児島県南さつま市加世田唐仁原613-1
+                            （<a href="https://www.google.com/maps/search/?api=1&query=南さつま市加世田唐仁原613-1" target="_blank" rel="noopener">Google Map</a>）
+                        </span>
+                    </li>
+                    <li>
+                        <span class="info-label">TEL</span>
+                        <span class="info-value"><a href="tel:090-6831-0625">090-6831-0625</a></span>
+                    </li>
+                </ul>
 
-                <dl class="grid sm:grid-cols-12 gap-y-4 text-sm tracking-wider leading-relaxed">
-                    <dt class="sm:col-span-3 text-white/75 font-medium">住所</dt>
-                    <dd class="sm:col-span-9">
-                        鹿児島県南さつま市加世田唐仁原613-1
-                        <a href="https://www.google.com/maps/search/?api=1&query=鹿児島県南さつま市加世田唐仁原613-1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 ml-2 underline text-white hover:opacity-80 text-xs">
-                            <span>📍 Google Map</span>
-                        </a>
-                    </dd>
-
-                    <dt class="sm:col-span-3 text-white/75 font-medium">営業時間</dt>
-                    <dd class="sm:col-span-9">9:00 〜 19:00</dd>
-
-                    <dt class="sm:col-span-3 text-white/75 font-medium">定休日</dt>
-                    <dd class="sm:col-span-9">毎週月曜日 ／ 第3日曜日</dd>
-
-                    <dt class="sm:col-span-3 text-white/75 font-medium">電話番号</dt>
-                    <dd class="sm:col-span-9">
-                        <a href="tel:090-6831-0625" class="font-serifEn text-xl tracking-widest underline hover:opacity-80">090-6831-0625</a>
-                    </dd>
-                </dl>
-
-                <!-- アクションボタン -->
-                <div class="mt-8 pt-6 border-t border-white/20 flex flex-wrap gap-4">
-                    <a href="tel:090-6831-0625" class="flex-1 min-w-[220px] bg-white text-charcoal text-center py-3.5 px-6 text-sm font-medium tracking-widest rounded-sm hover:bg-offwhite transition shadow-sm">
-                        📞 090-6831-0625 に電話をかける
-                    </a>
-                    <a href="https://www.google.com/maps/search/?api=1&query=鹿児島県南さつま市加世田唐仁原613-1" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[220px] border border-white text-white text-center py-3.5 px-6 text-sm tracking-widest rounded-sm hover:bg-white/15 transition">
-                        🗺️ Googleマップで経路を見る
-                    </a>
+                <div class="btn-group">
+                    <a href="tel:090-6831-0625" class="btn-action">📞 お電話でのご予約はこちら</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=南さつま市加世田唐仁原613-1" target="_blank" rel="noopener" class="btn-action">📍 Googleマップで見る</a>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- フッター -->
-    <footer class="bg-greige stucco-texture text-white text-center py-10 px-4 border-t border-white/20">
-        <div class="flex justify-center items-center gap-2 mb-2">
-            <svg class="w-5 h-4 fill-white" viewBox="0 0 100 85">
-                <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
-            </svg>
-            <span class="font-sansEn text-sm tracking-[0.25em]">BISCCO</span>
-        </div>
-        <p class="font-serifEn text-xs tracking-widest text-white/85">&copy; 2026 beauty salon BISCCO All Rights Reserved.</p>
+    <footer>
+        <p>&copy; 2026 BISCCO All Rights Reserved.</p>
     </footer>
 
-    <!-- 予約・お問い合わせ案内モーダル（alertの代替） -->
-    <div id="reserveModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-offwhite text-charcoal max-w-md w-full rounded-sm p-7 shadow-2xl border-t-4 border-greige space-y-5 relative">
-            <button onclick="closeReserveModal()" class="absolute top-4 right-5 text-2xl text-charcoal/60 hover:text-charcoal">&times;</button>
-            <div class="text-center space-y-1">
-                <p class="font-serifEn text-xs tracking-[0.25em] text-gold uppercase">Reservation</p>
-                <h3 class="text-lg font-medium tracking-wider">ご予約・お問い合わせ</h3>
-            </div>
-            <p class="text-xs leading-relaxed text-charcoal/80 text-center">
-                お電話にてご予約・お問い合わせを承っております。<br>
-                フェイシャルエステやヘアセットのご相談もお気軽にご連絡ください。
-            </p>
-            <div class="bg-sand/70 p-4 rounded-sm text-center space-y-1">
-                <p class="text-xs text-charcoal/70">お電話でのご予約（9:00〜19:00）</p>
-                <a href="tel:090-6831-0625" class="block font-serifEn text-2xl tracking-widest text-charcoal font-semibold hover:underline">
-                    090-6831-0625
-                </a>
-                <p class="text-[11px] text-charcoal/60">定休日：毎週月曜日／第3日曜日</p>
-            </div>
-            <div class="flex flex-col gap-2.5">
-                <a href="tel:090-6831-0625" class="w-full bg-greige text-white text-center py-3 text-sm tracking-widest rounded-sm hover:bg-greigeDark transition">
-                    電話を発信する
-                </a>
-                <button onclick="closeReserveModal()" class="w-full border border-charcoal/20 text-charcoal/70 py-2.5 text-xs tracking-widest rounded-sm hover:bg-sand/50 transition">
-                    閉じる
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // ナビゲーションドロワーの開閉
-        function toggleDrawer() {
+        function toggleMenu() {
             const drawer = document.getElementById('navDrawer');
-            const backdrop = document.getElementById('drawerBackdrop');
-            const isOpen = !drawer.classList.contains('translate-x-full');
-
-            if (isOpen) {
-                drawer.classList.add('translate-x-full');
-                backdrop.classList.add('opacity-0');
-                setTimeout(() => backdrop.classList.add('hidden'), 300);
-            } else {
-                backdrop.classList.remove('hidden');
-                setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
-                drawer.classList.remove('translate-x-full');
-            }
-        }
-
-        // 予約モーダルの開閉
-        function openReserveModal() {
-            const modal = document.getElementById('reserveModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeReserveModal() {
-            const modal = document.getElementById('reserveModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            drawer.classList.toggle('active');
         }
     </script>
 </body>
