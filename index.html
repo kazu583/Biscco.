@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BISCCO | beauty salon - hair make & フェイシャルエステ（南さつま市加世田）</title>
-    <!-- フォントの読み込み（1つ前のbiscco.htmlと完全同一） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --frame-greige: #b5ada3;   /* 塗り壁のグレージュ（フレーム） */
-            --bg-offwhite: #faf8f5;    /* メニュー表のオフホワイト */
-            --bg-sand: #ede8e1;        /* 柔らかいサンドベージュ */
-            --bg-wood: #9c8879;        /* サロン紹介のウォームブラウン */
-            --accent-gold: #b89f78;    /* メニュー表のゴールドベージュ */
-            --text-dark: #3e3a37;      /* チャコールブラウン */
+            --frame-greige: #b5ada3;
+            --bg-offwhite: #faf8f5;
+            --bg-sand: #ede8e1;
+            --bg-wood: #9c8879;
+            --accent-gold: #b89f78;
+            --text-dark: #3e3a37;
             --text-light: #ffffff;
         }
 
@@ -38,7 +37,6 @@
             padding-top: 64px;
         }
 
-        /* 左端の固定グレージュフレーム */
         .left-frame {
             position: fixed;
             top: 0;
@@ -49,7 +47,6 @@
             z-index: 90;
         }
 
-        /* 上部の固定ヘッダー */
         header {
             position: fixed;
             top: 0;
@@ -60,9 +57,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
+            padding: 0 20px;
             z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.18);
         }
 
         .logo {
@@ -72,24 +68,25 @@
             text-decoration: none;
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
-            font-size: 19px;
+            font-size: 20px;
             letter-spacing: 4px;
             font-weight: 500;
         }
 
         .logo-svg {
-            width: 26px;
-            height: 22px;
+            width: 28px;
+            height: 24px;
             fill: var(--text-light);
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
         }
 
         .btn-reserve {
             color: var(--text-light);
-            border: 1px solid rgba(255,255,255,0.8);
-            padding: 7px 18px;
+            border: 1px solid var(--text-light);
+            padding: 6px 14px;
             font-family: 'Cormorant Garamond', serif;
             font-size: 13px;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-decoration: none;
             transition: 0.3s;
         }
@@ -100,8 +97,8 @@
         }
 
         .menu-toggle {
-            width: 26px;
-            height: 16px;
+            width: 28px;
+            height: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -117,7 +114,6 @@
             background-color: var(--text-light);
         }
 
-        /* ナビゲーションドロワー */
         .nav-drawer {
             position: fixed;
             top: 0;
@@ -163,11 +159,10 @@
             letter-spacing: 2px;
         }
 
-        /* セクション共通設定 */
         section {
             position: relative;
-            padding: 80px 25px 80px 50px;
-            max-width: 960px;
+            padding: 80px 25px 80px 45px;
+            max-width: 920px;
             margin: 0 auto;
         }
 
@@ -177,32 +172,33 @@
             overflow: hidden;
         }
 
-        /* 左端フレーム境界の縦向きタイトル */
         .side-title {
             position: absolute;
-            top: 75px;
-            left: -14px;
+            top: 65px;
+            left: -16px;
             writing-mode: vertical-rl;
             transform: rotate(180deg);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 500;
+            font-size: 54px;
+            font-weight: 600;
             color: var(--text-light);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             line-height: 1;
             user-select: none;
             z-index: 95;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
         .side-title.dark-text {
             color: var(--frame-greige);
+            text-shadow: none;
         }
 
-        /* 1. ヒーロー＆コンセプト（biscco.htmlのトーン・フォントを完全再現） */
+        /* 1. ヒーロー＆コンセプト（2カラム対応：右側にlogo.jpgを表示） */
         .hero-concept {
-            background: linear-gradient(135deg, #c2bab0 0%, #a99f94 55%, #94897e 100%);
+            background: linear-gradient(160deg, #cbc4bc 0%, #9e958b 50%, #877d73 100%);
             color: var(--text-light);
-            min-height: calc(100vh - 64px);
+            min-height: 88vh;
             display: flex;
             align-items: center;
         }
@@ -210,121 +206,113 @@
         .hero-inner {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 45px;
+            gap: 40px;
             align-items: center;
             width: 100%;
         }
 
         .open-badge {
             display: inline-block;
-            border: 1px solid rgba(255,255,255,0.65);
-            padding: 7px 20px;
-            margin-bottom: 26px;
+            border: 1px solid rgba(255,255,255,0.7);
+            padding: 6px 20px;
+            margin-bottom: 22px;
             font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             font-size: 15px;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.1);
         }
 
         .hero-sub-en {
             font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 25px;
-            letter-spacing: 2.5px;
-            opacity: 0.92;
-            margin-bottom: 6px;
+            font-size: 26px;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            margin-bottom: 4px;
         }
 
         .hero-catch {
             font-family: 'Montserrat', sans-serif;
-            font-size: 54px;
-            line-height: 1.05;
-            margin-bottom: 20px;
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 18px;
             font-weight: 500;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
         }
 
         .service-tags {
             font-size: 14px;
-            letter-spacing: 3px;
-            margin-bottom: 34px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.35);
+            letter-spacing: 2.5px;
+            margin-bottom: 30px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.4);
             display: inline-block;
         }
 
         .concept-sub {
             font-size: 19px;
-            line-height: 1.7;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
             font-weight: 400;
         }
 
         .concept-text {
-            font-size: 13px;
-            line-height: 2.25;
-            max-width: 480px;
+            font-size: 13.5px;
+            line-height: 2.2;
             letter-spacing: 0.06em;
-            opacity: 0.92;
+            opacity: 0.95;
         }
 
-        /* 右側の情報カード（ロゴ部分のみ修正） */
+        /* 右側の情報カード（logo.jpgを表示） */
         .hero-card {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
-            padding: 40px 28px;
+            padding: 35px 25px;
             text-align: center;
-            max-width: 320px;
-            margin: 0 auto;
-            width: 100%;
+            backdrop-filter: blur(4px);
         }
 
-        /* 丸いロゴ枠：logo.jpgの四隅の白フチが見えないよう拡大してトリミング */
         .hero-logo-circle {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 24px auto;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px auto;
             border-radius: 50%;
             overflow: hidden;
-            border: 1.5px solid rgba(255, 255, 255, 0.55);
-            background-color: #9c9690;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background-color: #9e9892;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
 
         .hero-logo-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scale(1.18); /* 白い外周を隠して丸いモルタル面だけを表示 */
         }
 
         .hero-card-date {
             font-family: 'Cormorant Garamond', serif;
             font-size: 24px;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .hero-card-hours {
-            font-size: 11.5px;
-            line-height: 1.9;
-            opacity: 0.88;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.22);
+            font-size: 12px;
+            line-height: 1.8;
+            opacity: 0.9;
+            padding-bottom: 18px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.25);
         }
 
         .hero-card-services {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 14.5px;
+            font-size: 15px;
             letter-spacing: 1.5px;
-            line-height: 1.75;
-            opacity: 0.92;
+            line-height: 1.7;
+            opacity: 0.95;
         }
 
         /* 2. Menu */
@@ -375,17 +363,20 @@
             letter-spacing: 0.06em;
         }
 
-        /* 数字のフォントはそのままに、「〜」を数字の真横に揃える設定 */
         .menu-price {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 17px;
+            font-size: 18px;
             letter-spacing: 1px;
+            font-variant-numeric: lining-nums;
+            display: inline-flex;
+            align-items: center;
         }
 
         .tilde {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 14px;
             display: inline-block;
-            vertical-align: middle;
-            transform: translateY(2px);
+            transform: translateY(1px);
             margin-left: 2px;
         }
 
@@ -401,7 +392,7 @@
             color: #6e655c;
         }
 
-        /* 3. Salon & Access */
+        /* 3. Salon & Access（exterior.jpgを表示） */
         .salon-wrap {
             background-color: var(--bg-wood);
             color: var(--text-light);
@@ -410,7 +401,7 @@
         .salon-gallery {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 20px;
             margin-bottom: 40px;
         }
 
@@ -437,7 +428,7 @@
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 4px;
-            padding: 34px 30px;
+            padding: 32px 28px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -551,13 +542,13 @@
 
         @media (min-width: 768px) {
             .hero-inner {
-                grid-template-columns: 1.3fr 0.9fr;
+                grid-template-columns: 1.35fr 0.85fr;
             }
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
             }
             section {
-                padding: 100px 45px 100px 75px;
+                padding: 100px 40px 100px 65px;
             }
         }
     </style>
@@ -609,10 +600,10 @@
                     </p>
                 </div>
 
-                <!-- 右側カード：白い外周をカットして logo.jpg を綺麗に表示 -->
+                <!-- 右側カード：ここにGitHub上の logo.jpg が表示されます -->
                 <div class="hero-card">
                     <div class="hero-logo-circle">
-                        <img src="logo.jpg" alt="BISCCO ロゴ">
+                        <img src="./logo.jpg" alt="BISCCO ロゴ">
                     </div>
                     <div class="hero-card-date">2026.6/25 (THU)</div>
                     <div class="hero-card-hours">
@@ -722,10 +713,12 @@
         <div class="side-title">Salon</div>
         <section>
             <div class="salon-gallery">
+                <!-- 左側：ここにGitHub上の exterior.jpg が表示されます -->
                 <div class="salon-photo-box">
-                    <img src="exterior.jpg" alt="BISCCO 外観">
+                    <img src="./exterior.jpg" alt="BISCCO 外観">
                 </div>
 
+                <!-- 右側：ヒーリングスペース紹介 -->
                 <div class="salon-card">
                     <div class="healing-tag">PRIVATE HEALING SPACE</div>
                     <h3 class="healing-title">髪も素肌も整う、癒やしの時間</h3>
