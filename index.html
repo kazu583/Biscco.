@@ -467,7 +467,7 @@
 
         .salon-photo-box {
             width: 100%;
-            min-height: 280px;
+            height: 280px;
             background-color: rgba(255,255,255,0.12);
             border: 1px solid rgba(255,255,255,0.3);
             border-radius: 4px;
@@ -588,6 +588,9 @@
             }
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
+            }
+            .salon-photo-box {
+                height: 320px;
             }
             section {
                 padding: 100px 40px 100px 70px;
@@ -757,7 +760,7 @@
                     </ul>
                 </div>
 
-                <!-- Esthetic の欄（リフトアップフェイシャル＋工程詳細＋オプション3種） -->
+                <!-- Esthetic の欄 -->
                 <div class="menu-category">
                     <h3>Esthetic</h3>
                     <ul class="menu-list">
@@ -796,16 +799,16 @@
         <div class="side-title">Salon</div>
         <section>
             <div class="salon-gallery">
-                <!-- 左側：外観写真エリア -->
+                <!-- 上段左：外観写真エリア -->
                 <div class="salon-photo-box">
                     <img src="exterior.jpg" alt="BISCCO. 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="photo-placeholder-text" style="display:none;">
                         <strong>BISCCO. 外観イメージ</strong><br>
-                        （外観のお写真を <code>exterior.jpg</code> という名前で同じフォルダに置くとここに表示されます）
+                        （<code>exterior.jpg</code> をアップロードすると表示されます）
                     </div>
                 </div>
 
-                <!-- 右側：プライベートヒーリングスペース紹介 -->
+                <!-- 上段右：プライベートヒーリングスペース紹介 -->
                 <div class="salon-card">
                     <div class="healing-tag">PRIVATE HEALING SPACE</div>
                     <h3 class="healing-title">髪も素肌も整う、癒やしの時間</h3>
@@ -817,6 +820,24 @@
                         <li>・Hair Design</li>
                         <li>・Facial Esthetic</li>
                     </ul>
+                </div>
+
+                <!-- 下段左（赤いライン左）：店内写真 1（IMG_2571.jpg または interior1.jpg 対応） -->
+                <div class="salon-photo-box">
+                    <img src="IMG_2571.jpg" alt="BISCCO. 店内写真1" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='interior1.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='IMG_2571.JPG';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
+                    <div class="photo-placeholder-text" style="display:none;">
+                        <strong>BISCCO. 店内写真 1</strong><br>
+                        （<code>IMG_2571.jpg</code> または <code>interior1.jpg</code> をGitHubにアップロードするとここに表示されます）
+                    </div>
+                </div>
+
+                <!-- 下段右（赤いライン右）：店内写真 2（IMG_2570.JPG または interior2.jpg 対応） -->
+                <div class="salon-photo-box">
+                    <img src="IMG_2570.JPG" alt="BISCCO. 店内写真2" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='interior2.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='IMG_2570.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
+                    <div class="photo-placeholder-text" style="display:none;">
+                        <strong>BISCCO. 店内写真 2</strong><br>
+                        （<code>IMG_2570.JPG</code> または <code>interior2.jpg</code> をGitHubにアップロードするとここに表示されます）
+                    </div>
                 </div>
             </div>
 
