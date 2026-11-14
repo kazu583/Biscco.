@@ -212,11 +212,11 @@
             position: relative;
         }
 
-        /* 左端の縦向きタイトル（見切れないように位置と重なりを調整） */
+        /* 左端の縦向きタイトル（上部や左端が見切れないように位置を調整） */
         .side-title {
             position: absolute;
-            top: 65px;
-            left: 4px;
+            top: 85px;
+            left: 6px;
             writing-mode: vertical-rl;
             transform: rotate(180deg);
             font-family: 'Cormorant Garamond', serif;
@@ -420,14 +420,16 @@
             grid-template-columns: 1fr;
             gap: 20px;
             margin-bottom: 40px;
+            align-items: stretch;
         }
 
-        /* プライベートヒーリングスペース紹介カード */
+        /* プライベートヒーリングスペース紹介カード（写真枠とサイズ・バランスを完全に統一） */
         .salon-card {
+            width: 100%;
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 4px;
-            padding: 32px 28px;
+            padding: 24px 26px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -435,34 +437,34 @@
 
         .healing-tag {
             font-family: 'Montserrat', sans-serif;
-            font-size: 11px;
+            font-size: 10.5px;
             letter-spacing: 3px;
             opacity: 0.85;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .healing-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 400;
             letter-spacing: 1.5px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .healing-desc {
-            font-size: 13px;
-            line-height: 2.1;
+            font-size: 12.5px;
+            line-height: 1.95;
             opacity: 0.92;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            padding-bottom: 14px;
+            margin-bottom: 14px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .healing-features {
             list-style: none;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 19px;
+            font-size: 17.5px;
             letter-spacing: 1.5px;
-            line-height: 1.8;
+            line-height: 1.65;
         }
 
         .salon-photo-box {
@@ -589,15 +591,18 @@
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
             }
-            .salon-photo-box {
-                height: 320px;
+            /* PC表示時は写真3枚とテキストカード1枚の縦・横サイズを300pxでピタッと揃える */
+            .salon-photo-box,
+            .salon-card {
+                height: 300px;
             }
             section {
                 padding: 100px 40px 100px 70px;
             }
             .side-title {
                 font-size: 54px;
-                left: 6px;
+                top: 100px;
+                left: 8px;
             }
         }
     </style>
@@ -808,7 +813,7 @@
                     </div>
                 </div>
 
-                <!-- 上段右：プライベートヒーリングスペース紹介 -->
+                <!-- 上段右：プライベートヒーリングスペース紹介（周りの写真と高さ・幅を完全統一） -->
                 <div class="salon-card">
                     <div class="healing-tag">PRIVATE HEALING SPACE</div>
                     <h3 class="healing-title">髪も素肌も整う、癒やしの時間</h3>
@@ -822,21 +827,21 @@
                     </ul>
                 </div>
 
-                <!-- 下段左（赤いライン左）：店内写真 1（IMG_2571.jpg または interior1.jpg 対応） -->
+                <!-- 下段左：店内写真 1 -->
                 <div class="salon-photo-box">
                     <img src="IMG_2571.jpg" alt="BISCCO. 店内写真1" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='interior1.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='IMG_2571.JPG';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
                     <div class="photo-placeholder-text" style="display:none;">
                         <strong>BISCCO. 店内写真 1</strong><br>
-                        （<code>IMG_2571.jpg</code> または <code>interior1.jpg</code> をGitHubにアップロードするとここに表示されます）
+                        （<code>IMG_2571.jpg</code> または <code>interior1.jpg</code> をアップロードすると表示されます）
                     </div>
                 </div>
 
-                <!-- 下段右（赤いライン右）：店内写真 2（IMG_2570.JPG または interior2.jpg 対応） -->
+                <!-- 下段右：店内写真 2 -->
                 <div class="salon-photo-box">
                     <img src="IMG_2570.JPG" alt="BISCCO. 店内写真2" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='interior2.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='IMG_2570.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
                     <div class="photo-placeholder-text" style="display:none;">
                         <strong>BISCCO. 店内写真 2</strong><br>
-                        （<code>IMG_2570.JPG</code> または <code>interior2.jpg</code> をGitHubにアップロードするとここに表示されます）
+                        （<code>IMG_2570.JPG</code> または <code>interior2.jpg</code> をアップロードすると表示されます）
                     </div>
                 </div>
             </div>
