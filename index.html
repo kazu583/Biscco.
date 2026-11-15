@@ -236,7 +236,7 @@
             text-shadow: none;
         }
 
-        /* 1. ヒーロー＆コンセプト（背景写真をもう少しはっきり見せる仕様） */
+        /* 1. ヒーロー＆コンセプト */
         .hero-concept {
             background: linear-gradient(160deg, #cbc4bc 0%, #9e958b 50%, #877d73 100%);
             color: var(--text-light);
@@ -252,6 +252,17 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* 【エフェクト②】オープニングのスロー・ズームアウト演出 */
+        @keyframes heroSlowZoom {
+            0% {
+                transform: scale(1.09);
+            }
+            100% {
+                transform: scale(1.0);
+            }
         }
 
         .hero-bg-media img {
@@ -259,12 +270,13 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            /* モノクロ感を残しつつ、コントラストと不透明度（0.46）を上げてディテールをもう少しはっきり表示 */
             filter: grayscale(78%) sepia(15%) contrast(102%) brightness(92%);
             opacity: 0.46;
+            animation: heroSlowZoom 7.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform;
         }
 
-        /* サイトのカラーバランスと白文字の視認性を守るグレージュベール（少し薄めに調整） */
+        /* サイトのカラーバランスと白文字の視認性を守るグレージュベール */
         .hero-bg-media::after {
             content: "";
             position: absolute;
@@ -276,6 +288,37 @@
                 rgba(122, 112, 102, 0.62) 100%
             );
         }
+
+        /* 【エフェクト②】オープニング文字のソフトフォーカス（ピント合わせ）フェードイン */
+        @keyframes heroTextFocus {
+            0% {
+                opacity: 0;
+                transform: translateY(14px);
+                filter: blur(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .hero-anim-1,
+        .hero-anim-2,
+        .hero-anim-3,
+        .hero-anim-4,
+        .hero-anim-5,
+        .hero-anim-6 {
+            opacity: 0;
+            animation: heroTextFocus 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .hero-anim-1 { animation-delay: 0.15s; }
+        .hero-anim-2 { animation-delay: 0.35s; }
+        .hero-anim-3 { animation-delay: 0.55s; }
+        .hero-anim-4 { animation-delay: 0.75s; }
+        .hero-anim-5 { animation-delay: 0.95s; }
+        .hero-anim-6 { animation-delay: 1.15s; }
 
         .open-badge {
             display: inline-flex;
@@ -348,6 +391,19 @@
             letter-spacing: 0.08em;
             opacity: 0.98;
             text-shadow: 0 1px 8px rgba(0,0,0,0.18);
+        }
+
+        /* 【エフェクト①】スクロール時のふんわりフェードイン共通クラス */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* 2. Menu（メニュー表のエレガントなデザインを再現） */
@@ -519,10 +575,17 @@
             justify-content: center;
         }
 
+        /* 【エフェクト③】外観・店内写真のホバー・シネマズーム */
         .salon-photo-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), filter 1.6s ease;
+            will-change: transform;
+        }
+
+        .salon-photo-box:hover img {
+            transform: scale(1.06);
         }
 
         .photo-placeholder-text {
@@ -591,12 +654,13 @@
             text-decoration: none;
             font-size: 14px;
             letter-spacing: 1.5px;
-            transition: 0.3s;
+            transition: background-color 0.3s, transform 0.3s ease;
             font-weight: 500;
         }
 
         .btn-action:hover {
             background-color: var(--bg-sand);
+            transform: translateY(-2px);
         }
 
         .btn-action svg {
@@ -691,20 +755,20 @@
 
     <!-- 1. Home & Concept -->
     <div class="section-wrapper hero-concept" id="home">
-        <!-- 背景写真レイヤー（IMG_2576.jpg / IMG_2576.JPG / concept-bg.jpg に自動対応） -->
+        <!-- 背景写真レイヤー（スロー・ズームアウト付き） -->
         <div class="hero-bg-media">
             <img src="IMG_2576.jpg" alt="" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='IMG_2576.JPG';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='concept-bg.jpg';}else{this.style.display='none';}">
         </div>
 
         <div class="side-title">Concept</div>
         <section id="concept">
-            <div class="open-badge">EST . 2026</div>
-            <div class="hero-sub-en">beauty salon</div>
-            <h1 class="hero-catch">BISCCO.</h1>
-            <div class="service-tags">hair make ／ フェイシャルエステ</div>
+            <div class="open-badge hero-anim-1">EST . 2026</div>
+            <div class="hero-sub-en hero-anim-2">beauty salon</div>
+            <h1 class="hero-catch hero-anim-3">BISCCO.</h1>
+            <div class="service-tags hero-anim-4">hair make ／ フェイシャルエステ</div>
             
-            <h2 class="concept-sub">日常に、心地よい余白と美しさを。</h2>
-            <p class="concept-text">
+            <h2 class="concept-sub hero-anim-5">日常に、心地よい余白と美しさを。</h2>
+            <p class="concept-text hero-anim-6">
                 南さつま市加世田の穏やかな街並みに佇む、プライベート感のあるビューティーサロン「BISCCO.」。<br>
                 毎日のヘアスタイルから、特別な日のヘアメイク、素肌を整えるフェイシャルエステまで。落ち着いた空間の中で、あなたらしい自然体の美しさを引き出すお手伝いをいたします。
             </p>
@@ -715,10 +779,10 @@
     <div class="section-wrapper menu-wrap" id="menu">
         <div class="side-title dark-text">Menu</div>
         <section>
-            <h2 class="menu-script-header">Menu</h2>
+            <h2 class="menu-script-header fade-in-up">Menu</h2>
 
             <div class="menu-grid">
-                <div class="menu-category">
+                <div class="menu-category fade-in-up">
                     <h3>Cut</h3>
                     <ul class="menu-list">
                         <li class="menu-item">
@@ -736,7 +800,7 @@
                     </ul>
                 </div>
 
-                <div class="menu-category">
+                <div class="menu-category fade-in-up">
                     <h3>Color</h3>
                     <ul class="menu-list">
                         <li class="menu-item">
@@ -750,7 +814,7 @@
                     </ul>
                 </div>
 
-                <div class="menu-category">
+                <div class="menu-category fade-in-up">
                     <h3>Perm</h3>
                     <ul class="menu-list">
                         <li class="menu-item">
@@ -764,7 +828,7 @@
                     </ul>
                 </div>
 
-                <div class="menu-category">
+                <div class="menu-category fade-in-up">
                     <h3>Treatment</h3>
                     <ul class="menu-list">
                         <li class="menu-item">
@@ -775,7 +839,7 @@
                 </div>
 
                 <!-- Hair make の欄 -->
-                <div class="menu-category">
+                <div class="menu-category fade-in-up">
                     <h3>Hair make</h3>
                     <ul class="menu-list">
                         <li class="menu-item">
@@ -810,7 +874,7 @@
                 </div>
 
                 <!-- Esthetic の欄 -->
-                <div class="menu-category">
+                <div class="menu-category fade-in-up">
                     <h3>Esthetic</h3>
                     <ul class="menu-list">
                         <li class="menu-item">
@@ -837,7 +901,7 @@
                 </div>
             </div>
 
-            <div class="menu-feature-tags">
+            <div class="menu-feature-tags fade-in-up">
                 Cut / Color / Perm / Straight / Treatment / Set / Facial Esthetic
             </div>
         </section>
@@ -849,7 +913,7 @@
         <section>
             <div class="salon-gallery">
                 <!-- 上段左：外観写真エリア -->
-                <div class="salon-photo-box">
+                <div class="salon-photo-box fade-in-up">
                     <img src="exterior.jpg" alt="BISCCO. 外観" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                     <div class="photo-placeholder-text" style="display:none;">
                         <strong>BISCCO. 外観イメージ</strong><br>
@@ -858,7 +922,7 @@
                 </div>
 
                 <!-- 上段右：プライベートヒーリングスペース紹介 -->
-                <div class="salon-card">
+                <div class="salon-card fade-in-up" style="transition-delay: 0.12s;">
                     <div class="healing-tag">PRIVATE HEALING SPACE</div>
                     <h3 class="healing-title">髪も素肌も整う、癒やしの時間</h3>
                     <p class="healing-desc">
@@ -872,7 +936,7 @@
                 </div>
 
                 <!-- 下段左：店内写真 1 -->
-                <div class="salon-photo-box">
+                <div class="salon-photo-box fade-in-up">
                     <img src="IMG_2571.jpg" alt="BISCCO. 店内写真1" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='interior1.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='IMG_2571.JPG';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
                     <div class="photo-placeholder-text" style="display:none;">
                         <strong>BISCCO. 店内写真 1</strong><br>
@@ -881,7 +945,7 @@
                 </div>
 
                 <!-- 下段右：店内写真 2 -->
-                <div class="salon-photo-box">
+                <div class="salon-photo-box fade-in-up" style="transition-delay: 0.12s;">
                     <img src="IMG_2570.JPG" alt="BISCCO. 店内写真2" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='interior2.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='IMG_2570.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
                     <div class="photo-placeholder-text" style="display:none;">
                         <strong>BISCCO. 店内写真 2</strong><br>
@@ -890,7 +954,7 @@
                 </div>
             </div>
 
-            <div class="salon-info-box">
+            <div class="salon-info-box fade-in-up">
                 <div class="salon-name-title">
                     <svg class="logo-svg" viewBox="0 0 100 85">
                         <path d="M10,12 C10,5 15,0 22,0 L42,0 C55,0 62,8 66,20 C69,28 75,32 84,35 C93,38 98,46 98,58 L98,75 C98,80 94,84 88,84 L12,84 C6,84 2,80 2,74 L2,12 Z M32,22 A11,11 0 1,0 32,44 A11,11 0 1,0 32,22 Z" fill-rule="evenodd"/>
@@ -950,6 +1014,25 @@
             const drawer = document.getElementById('navDrawer');
             drawer.classList.toggle('active');
         }
+
+        // スクロール時のふんわりフェードイン検知
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px 0px -60px 0px',
+                threshold: 0.12
+            });
+
+            fadeElements.forEach(el => observer.observe(el));
+        });
     </script>
 </body>
 </html>
