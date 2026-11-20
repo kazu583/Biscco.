@@ -518,13 +518,13 @@
             align-items: stretch;
         }
 
-        /* プライベートヒーリングスペース紹介カード（写真枠とサイズ・バランスを完全に統一） */
+        /* プライベートヒーリングスペース紹介カード */
         .salon-card {
             width: 100%;
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 4px;
-            padding: 24px 26px;
+            padding: 22px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -532,39 +532,40 @@
 
         .healing-tag {
             font-family: 'Montserrat', sans-serif;
-            font-size: 10.5px;
+            font-size: 10px;
             letter-spacing: 3px;
             opacity: 0.85;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .healing-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 400;
             letter-spacing: 1.5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .healing-desc {
-            font-size: 12.5px;
-            line-height: 1.95;
+            font-size: 12px;
+            line-height: 1.85;
             opacity: 0.92;
-            padding-bottom: 14px;
-            margin-bottom: 14px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .healing-features {
             list-style: none;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 17.5px;
+            font-size: 16.5px;
             letter-spacing: 1.5px;
-            line-height: 1.65;
+            line-height: 1.55;
         }
 
+        /* 写真本来の横長画角（3:2）を活かし、アップにならず引きで見せる枠設定 */
         .salon-photo-box {
             width: 100%;
-            height: 280px;
+            aspect-ratio: 3 / 2;
             background-color: rgba(255,255,255,0.12);
             border: 1px solid rgba(255,255,255,0.3);
             border-radius: 4px;
@@ -585,7 +586,7 @@
         }
 
         .salon-photo-box:hover img {
-            transform: scale(1.06);
+            transform: scale(1.05);
         }
 
         .photo-placeholder-text {
@@ -694,10 +695,9 @@
             .salon-gallery {
                 grid-template-columns: 1fr 1fr;
             }
-            /* PC表示時は写真5枚とテキストカード1枚の縦・横サイズを300pxでピタッと揃える */
-            .salon-photo-box,
+            /* PC表示時もテキストカードと写真枠の3:2比率を揃えて高さをピタッと一致させる */
             .salon-card {
-                height: 300px;
+                aspect-ratio: 3 / 2;
             }
             section {
                 padding: 100px 40px 100px 70px;
@@ -953,7 +953,7 @@
                     </div>
                 </div>
 
-                <!-- 3段目左（新規追加）：店内写真 3（IMG_2666.JPG） -->
+                <!-- 3段目左：店内写真 3（IMG_2666.JPG） -->
                 <div class="salon-photo-box fade-in-up">
                     <img src="IMG_2666.JPG" alt="BISCCO. シャンプーブース" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='IMG_2666.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='interior3.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
                     <div class="photo-placeholder-text" style="display:none;">
@@ -962,7 +962,7 @@
                     </div>
                 </div>
 
-                <!-- 3段目右（新規追加）：店内写真 4（IMG_2665.JPG） -->
+                <!-- 3段目右：店内写真 4（IMG_2665.JPG） -->
                 <div class="salon-photo-box fade-in-up" style="transition-delay: 0.12s;">
                     <img src="IMG_2665.JPG" alt="BISCCO. エステスペース" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='IMG_2665.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='interior4.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='block';}">
                     <div class="photo-placeholder-text" style="display:none;">
